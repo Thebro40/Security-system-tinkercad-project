@@ -3,16 +3,6 @@
 #include <Servo.h>
 
 
-int melody[] = {
-
-  324,3452,455,325,2133,241
-};
-
-int noteDurations[] = {
-
-  4, 8, 8, 4, 4, 4, 4, 4
-};
-
 
 
 Servo myservo;
@@ -42,35 +32,12 @@ int currentposition=0;
 int greenled=12;
 int redled=13;
 int buzz=10;
-int invalidcount=12;
+int invalidcount=0;
  
  
  
 void setup()
-{
-  for (int thisNote = 0; thisNote < 8; thisNote++) {
-
-    // to calculate the note duration, take one second divided by the note type.
-
-    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
-
-    int noteDuration = 100 / noteDurations[thisNote];
-
-    tone(buzz, melody[thisNote], noteDuration);
-
-    // to distinguish the notes, set a minimum time between them.
-
-    // the note's duration + 30% seems to work well:
-
-    int pauseBetweenNotes = noteDuration * 1.30;
-
-    delay(pauseBetweenNotes);
-
-    // stop the tone playing:
-
-    noTone(8);
-
-  }
+{  
 displayscreen();
   
 pinMode(redled, OUTPUT);
@@ -231,8 +198,7 @@ lcd.println(" ");
 //**************KEYPRESS********************//
 void keypress()
 {
-  
-digitalWrite(buzz, HIGH);
+tone(buzz,700,50);
 delay(50);
 digitalWrite(buzz, LOW);
 }
